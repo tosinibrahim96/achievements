@@ -26,4 +26,23 @@ class Badge extends Model
     {
         return $this->belongsToMany(User::class, 'badge_user')->withTimestamps();
     }
+
+    /**
+     * Get the next badge based on the 
+     * current level
+     *
+     * @return NULL|\App\Models\Badge
+     */
+    public function getNextBadge(): ?Badge
+    {
+        $next_badge = $this->where('level', '>', $this->level)
+            ->orderBy('level')
+            ->first();
+
+        if (($next_badge)?->level == $this->level) {
+            return NULL;
+        }
+
+        return $next_badge;   
+    }
 }
