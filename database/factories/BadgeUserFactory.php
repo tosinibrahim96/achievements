@@ -48,6 +48,43 @@ class BadgeUserFactory extends Factory
     }
 
 
+    /**
+     * Assign a beginner badge to a user
+     *
+     * @return array
+     */
+    public function beginner()
+    {
+        $badge = Badge::factory()->beginner()->create();
+        
+
+        return $this->state(function (array $attributes) use ($badge) {
+            return [
+                'user_id' => $this->userId ?? User::factory(),
+                'badge_id' => $badge->id
+            ];
+        });
+        
+    }
+
+    /**
+     * Assign a intermediate badge to a user
+     *
+     * @return array
+     */
+    public function intermediate()
+    {
+        $badge = Badge::factory()->intermediate()->create();
+        
+        return $this->state(function (array $attributes) use ($badge) {
+            return [
+                'user_id' => $this->userId ?? User::factory(),
+                'badge_id' => $badge->id
+            ];
+        });
+        
+    }
+
 
     /**
      * Use the same user for all badges created

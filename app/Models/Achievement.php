@@ -25,4 +25,27 @@ class Achievement extends Model
     {
         return $this->belongsToMany(User::class, 'achievement_user')->withTimestamps();
     }
+
+
+
+    /**
+     * Get the next achievement based on the 
+     * achievement type (action) and the 
+     * current level
+     *
+     * @return NULL|\App\Models\Achievement
+     */
+    public function getNextAchievement(): ?Achievement
+    {
+        $next_achievement = $this->where('action', $this->action)
+            ->where('level', '>', $this->level)
+            ->orderBy('level')
+            ->first();
+
+        if (($next_achievement)?->level == $this->level) {
+            return NULL;
+        }
+
+        return $next_achievement;   
+    }
 }
