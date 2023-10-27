@@ -1,66 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Iphone Photography Backend Test
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+ [![GitHub license](https://img.shields.io/github/license/gothinkster/laravel-realworld-example-app.svg)](http://opensource.org/licenses/mit-license.php)
 
-## About Laravel
+> ### Laravel backend codebase for an app that allows users unlock achievements.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+----------
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Getting started
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/10.x/installation)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+This is the easiest way to get PHP and all it's dependencies on your system
+- Download WAMP or XAMPP to manage APACHE, MYSQL and PhpMyAdmin. This also installs PHP by default. You can follow [this ](https://youtu.be/h6DEDm7C37A)tutorial
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Download and install [composer ](https://getcomposer.org/)globally on your system
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Clone the repository
 
-### Premium Partners
+    git clone https://github.com/tosinibrahim96/ipp-backend-developer-test.git
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Switch to the repo folder
 
-## Contributing
+    cd ipp-backend-developer-test
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install all the dependencies using composer
 
-## Code of Conduct
+    composer install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copy the example env file and make the required configuration changes in the .env file
 
-## Security Vulnerabilities
+    cp .env.example .env
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Generate a new application key
 
-## License
+    php artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Run the database migrations (**Set the database connection in .env before migrating**)
+
+    php artisan migrate
+
+Start the local development server
+
+    php artisan serve
+
+You can now access the server at http://localhost:8000
+
+**TL;DR command list**
+
+    git clone https://github.com/tosinibrahim96/ipp-backend-developer-test.git
+    cd ipp-backend-developer-test
+    composer install
+    cp .env.example .env
+    php artisan key:generate
+
+## Environment variables
+
+- `.env` - Environment variables can be set in this file
+
+**Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
+
+    php artisan migrate
+    php artisan serve OR php artisan serve --port={PORT_NUMBER} (setting a PORT manually)
+
+## Database seeding
+
+**Populate the database with seed data.**
+
+Run the database seeder and you're done
+
+    php artisan db:seed
+
+***Note*** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to clean the database by running the following command
+
+    php artisan migrate:refresh
+    
+
+----------
+
+# Testing API
+
+Run the laravel development server
+
+    php artisan serve
+    php artisan serve --port={PORT_NUMBER} (setting a PORT manually)
+
+The api can now be accessed at
+
+    http://localhost:{PORT_NUMBER}
+
+Request headers
+
+
+# License
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2023 © <a href="https://www.linkedin.com/in/ibrahim-alausa/" target="_blank">Ibrahim Alausa</a>.
