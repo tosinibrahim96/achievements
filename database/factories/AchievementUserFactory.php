@@ -45,19 +45,4 @@ class AchievementUserFactory extends Factory
             },
         ];
     }
-
-
-    /**
-     * Use the same user for all comments created
-     */
-    public function singleUser(): Factory
-    {
-        $user = User::factory()->create();
-
-        return $this->state(function (array $attributes) use($user) {
-            return [
-                'user_id' => $user->id,
-            ];
-        });
-    }
 }
