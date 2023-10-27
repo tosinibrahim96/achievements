@@ -28,10 +28,6 @@ class UserAchievementService implements CanUnlockAchievement
             'achievement_id' => $achievement_id,
             'user_id' => $user_id
         ]);
-
-        if ($user_achievement->wasRecentlyCreated) {
-            event(new AchievementUnlocked($user_achievement->achievement->name, $user_achievement->user));
-        } 
     }
 
 
