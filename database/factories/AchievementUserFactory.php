@@ -47,6 +47,49 @@ class AchievementUserFactory extends Factory
     }
 
 
+
+    /**
+     * Attach a first comment written achievement to
+     * the user
+     *
+     * @return array
+     */
+    public function firstCommentWritten()
+    {
+        $achievement = Achievement::factory()->firstCommentWritten()->create();
+        
+
+        return $this->state(function (array $attributes) use ($achievement) {
+            return [
+                'user_id' => $this->userId ?? User::factory(),
+                'achievement_id' => $achievement->id
+            ];
+        });
+        
+    }
+
+
+    /**
+     * Attach a first lesson watched achievement to
+     * the user
+     *
+     * @return array
+     */
+    public function firstLessonWatched()
+    {
+        $achievement = Achievement::factory()->firstLessonWatched()->create();
+        
+
+        return $this->state(function (array $attributes) use ($achievement) {
+            return [
+                'user_id' => $this->userId ?? User::factory(),
+                'achievement_id' => $achievement->id
+            ];
+        });
+        
+    }
+
+
     /**
      * Use the same user for all comments created
      */

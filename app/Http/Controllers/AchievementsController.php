@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserAchievementResource;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AchievementsController extends Controller
 {
     public function index(User $user)
     {
-        return response()->json([
-            'unlocked_achievements' => [],
-            'next_available_achievements' => [],
-            'current_badge' => '',
-            'next_badge' => '',
-            'remaing_to_unlock_next_badge' => 0
-        ]);
+        return response()->json(
+            [
+                'status' => true,
+                'message' => "Achievement details retrieved successfully",
+                'data' => UserAchievementResource::make($user)
+            ],
+            Response::HTTP_OK
+        );
     }
 }
