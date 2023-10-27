@@ -16,6 +16,5 @@ class UserSeeder extends Seeder
          User::factory()->create();
 
          User::factory()->unverified()->create();
-
     }
 }
