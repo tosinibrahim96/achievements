@@ -47,4 +47,48 @@ class LessonUserFactory extends Factory
             'watched' => $this->faker->randomElement([true, false])
         ];
     }
+
+
+
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function watched()
+    {
+        if (Lesson::count() === 0) {
+            Lesson::factory()->create();
+        }
+
+        return $this->state(function (array $attributes) {
+            return [
+                'user_id' => $this->userId ?? User::factory(),
+                'lesson_id' => function () {
+                    $lessonIds = Lesson::pluck('id')->toArray();
+    
+                    return $this->faker->randomElement($lessonIds);
+                },
+                'watched' => true
+            ];
+        });
+        
+    }
+
+
+
+    /**
+     * Use the same user for all comments created
+     */
+    public function singleUser(): Factory
+    {
+        $user = User::factory()->create();
+
+        return $this->state(function (array $attributes) use($user) {
+            return [
+                'user_id' => $user->id,
+            ];
+        });
+    }
 }
