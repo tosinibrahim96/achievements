@@ -51,12 +51,24 @@ class LessonWatchedAchievement implements IsAchievableViaNewMilestone, CanBeUnlo
    */
   public function unlockForUser(User $user): void
   {
+    /**
+     * If for any reason, the 'hasReachedNewMilestone' method was not 
+     * called before this, then let's handle that here
+     */
+    if (!$this->hasReachedNewMilestone($user)) {
+      return;
+    }
+    
     $lessons_watched = $user->watched->count();
 
     $nextAchievement = Achievement::where('action', LESSON_WATCHED)
         ->where('action_count_required', '>=', $lessons_watched)
         ->orderBy('action_count_required')
         ->first();
+
+    if (!$nextAchievement) {
+      return;
+    }
 
     $this->user_achievement_service->unlockAchievement($user->id, $nextAchievement->id);
   }

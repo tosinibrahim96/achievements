@@ -82,4 +82,54 @@ class CommentWrittenAchievementTest extends TestCase
         
         $this->assertFalse($result);
     }
+
+
+
+    /**
+     * Test that the unlockAchievement does not get called when 
+     * the user has not reached a milestone
+     * 
+     */
+    public function test_unlock_achievement_not_called_user_has_not_reached_new_milestone(): void
+    {
+        (new AchievementSeeder())->run();
+
+        $user = User::factory()->create();
+
+        $user_achievement_service = Mockery::mock(UserAchievementService::class);
+        $user_achievement_service->shouldReceive('userAlreadyHasAchievement');
+        $user_achievement_service->shouldReceive('unlockAchievement');
+
+        $comment_written_achivement = new CommentWrittenAchievement($user_achievement_service);
+
+        $comment_written_achivement->unlockForUser($user);
+        
+        $user_achievement_service->shouldNotReceive('unlockAchievement');
+    }
+
+
+
+
+    /**
+     * Test that the unlockAchievement gets called when 
+     * the user has reached a new milestone
+     * 
+     */
+    public function test_unlock_achievement_called_user_has_reached_new_milestone(): void
+    {
+        (new AchievementSeeder())->run();
+
+        $user = User::factory()->create();
+        $user->comments()->saveMany(Comment::factory(1)->make());
+
+        $user_achievement_service = Mockery::mock(UserAchievementService::class);
+        $user_achievement_service->shouldReceive('userAlreadyHasAchievement');
+        $user_achievement_service->shouldReceive('unlockAchievement');
+
+        $comment_written_achivement = new CommentWrittenAchievement($user_achievement_service);
+
+        $comment_written_achivement->unlockForUser($user);
+
+        $user_achievement_service->shouldHaveReceived('unlockAchievement')->once();
+    }
 }

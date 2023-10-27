@@ -54,13 +54,25 @@ class CommentWrittenAchievement implements IsAchievableViaNewMilestone, CanBeUnl
    */
   public function unlockForUser(User $user): void
   {
+     /**
+     * If for any reason, the 'hasReachedNewMilestone' method was not 
+     * called before this, then let's handle that here
+     */
+    if (!$this->hasReachedNewMilestone($user)) {
+      return;
+    }
+
     $comments_count = $user->comments->count();
 
     $nextAchievement = Achievement::where('action', COMMENT_WRITTEN)
         ->where('action_count_required', '>=', $comments_count)
         ->orderBy('action_count_required')
         ->first();
-
+    
+    if (!isset($nextAchievement)) {
+      return;
+    }
+  
     $this->user_achievement_service->unlockAchievement($user->id, $nextAchievement->id);
   }
 }

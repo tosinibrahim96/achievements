@@ -28,10 +28,6 @@ class UserBadgeService implements CanUnlockBadge
             'badge_id' => $badge_id,
             'user_id' => $user_id
         ]);
-
-        if ($userBadge->wasRecentlyCreated) {
-            event(new BadgeUnlocked($userBadge->badge->name, $userBadge->user));
-        } 
     }
 
 
