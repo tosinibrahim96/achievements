@@ -44,7 +44,7 @@ class LessonUserFactory extends Factory
 
                 return $this->faker->randomElement($lessonIds);
             },
-            'watched' => $this->faker->randomElement([true, false])
+            'watched' => false
         ];
     }
 
@@ -79,7 +79,7 @@ class LessonUserFactory extends Factory
 
 
     /**
-     * Use the same user for all comments created
+     * Use the same user for all lessons created
      */
     public function singleUser(): Factory
     {

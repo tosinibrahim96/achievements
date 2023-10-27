@@ -49,11 +49,23 @@ class AchievementBadge implements IsAchievableViaNewMilestone, CanBeUnlocked
    */
   public function unlockForUser(User $user): void
   {
+    /**
+     * If for any reason, the 'hasReachedNewMilestone' method was not 
+     * called before this, then let's handle that here
+     */
+    if (!$this->hasReachedNewMilestone($user)) {
+      return;
+    }
+
     $achievements_count = $user->achievements->count();
 
     $nextBadge = Badge::where('achievement_count_required', '>=', $achievements_count)
         ->orderBy('achievement_count_required')
         ->first();
+
+    if (!$nextBadge) {
+      return;
+    }
 
     $this->user_badge_service->unlockBadge($user->id, $nextBadge->id);
   }
