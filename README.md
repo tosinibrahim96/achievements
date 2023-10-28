@@ -92,8 +92,9 @@ The api can now be accessed at
 
     http://localhost:{PORT_NUMBER}
 
-Request headers
+To run all tests, please run 
 
+    php artisan test
 
 # License
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
