@@ -21,11 +21,11 @@ This is the easiest way to get PHP and all it's dependencies on your system
 
 Clone the repository
 
-    git clone https://github.com/tosinibrahim96/ipp-backend-developer-test.git
+    git clone https://github.com/tosinibrahim96/achievements.git
 
 Switch to the repo folder
 
-    cd ipp-backend-developer-test
+    cd achievements
 
 Install all the dependencies using composer
 
@@ -51,8 +51,8 @@ You can now access the server at http://localhost:8000
 
 **TL;DR command list**
 
-    git clone https://github.com/tosinibrahim96/ipp-backend-developer-test.git
-    cd ipp-backend-developer-test
+    git clone https://github.com/tosinibrahim96/achievements.git
+    cd achievements
     composer install
     cp .env.example .env
     php artisan key:generate
