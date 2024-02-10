@@ -1,4 +1,4 @@
-# Iphone Photography Backend Test
+# Achievements
 
  [![GitHub license](https://img.shields.io/github/license/gothinkster/laravel-realworld-example-app.svg)](http://opensource.org/licenses/mit-license.php)
 
